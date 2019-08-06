@@ -1,0 +1,62 @@
+$black: #ffffff;
+$purple: #5c4084;
+
+body {
+  background-color: $black;
+  text-align: center;
+  padding: 50px;
+}
+.container {
+  background-color: #fff;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-radius: 8px;
+}
+.heading {
+  h1 {
+    color: #000000;
+    font-size: 4rem;
+    font-weight: 900;
+    margin: 0 0 5px 0;
+    background: -webkit-linear-gradient(#000, #000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  h4 {
+    color: lighten(#000000,30%);
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 35px 0;
+  }
+}
+.btn{
+  outline: none !important;
+}
+.btn.btn-primary {
+  background-color: $purple;
+  border-color: $purple;
+  outline: none;
+  &:hover {
+    background-color: darken($purple, 10%);
+    border-color: darken($purple, 10%);
+  }
+  &:active, &:focus {
+    background-color: lighten($purple, 5%);
+    border-color: lighten($purple, 5%);
+  }
+  & .fa {
+    padding-right: 2px;
+  }
+}
+select.form-control {
+  -webkit-appearance:none;
+  cursor: pointer;
+}
+table th {
+   text-align: center; 
+}
+.bold {
+  font-weight:bold;
+}

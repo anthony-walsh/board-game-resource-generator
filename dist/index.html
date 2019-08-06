@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>A Pen by  AJ</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+
+<div class="heading">
+  <h1>Board Game Resource Generator</h1>
+  <h4>Generate a spreadsheet of card types from basic input.</h4>
+</div>
+
+<div class="container" id="app">  
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+       <div class="form-group">
+         <label>Total Card Count </label>
+        <input type="number" v-model="totalCardCount" placeholder="Enter Total Card Count Required" class="form-control text-center" @change="recalculate(null)">
+        </input>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <label>Calculation Mode</label>
+    <div class="form-group">
+    <input type="radio" id="percent-mode" value="percent" v-model="mode">
+    <label for="percent-mode">%</label>
+    <br>
+    <input type="radio" id="count-mode" value="count" v-model="mode">
+    <label for="count-mode">Count</label>
+    <br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+      <div class="form-group">
+        <button v-on:click="retotal" class="btn btn-primary form-control">
+          <span class="fa fa-play"></span> Calculate
+        </button>    
+      </div>
+    </div>
+  </div>
+  <div class="align-items-center">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>%</th>
+          <th>Count</th>
+          <th>Value</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          is="resource-item"
+          v-for="(resource, index) in resources"
+          v-bind:key="resource.id"
+          v-bind:id="resource.id"
+          v-bind:index="index"
+          v-bind:title="resource.title"
+          v-bind:percentage="resource.percentage"
+          v-bind:count="resource.count"
+          v-bind:cardvalue="resource.value"
+          v-bind:mode="mode"
+          v-bind:assigned="selectedValue"
+          v-on:percent-input="calculateCurrentPercentage" 
+          v-on:card-input="calculateCurrentTotalCards" 
+          v-on:value-input="calculateAverageValue" 
+          v-on:remove="recalculate"
+          v-on:assign-leftovers="assignLeftovers"
+        >            
+        </tr>
+        <tr>
+          <td><div class="bold">TOTAL</div></td>
+          <td><div class="bold">{{currentPercentage}}%</div></td>
+          <td><div class="bold">{{currentTotalCards}}</div><div class="text-danger bold" v-if="currentRemainder != 0">(Leftovers: {{currentRemainder}})</div></td>
+          <td><div class="bold">Average = {{currentAverageValue}}</div></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+      <div class="form-group">
+        <input v-model="newResource" id="new-resource" class="form-control" placeholder="E.g. Wood">
+        <button v-on:click="addNewResource" class="btn btn-primary form-control">
+          <span class="fa fa-plus"></span> Add Resource
+        </button>    
+      </div>
+    </div>
+      <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+    <button v-on:click="download" class="btn btn-info form-control">
+      <span class="fa fa-download"></span> Download as Csv
+    </button>   
+  </div>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js'></script>
+<script  src="./script.js"></script>
+
+</body>
+</html>

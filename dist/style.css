@@ -1,0 +1,64 @@
+body {
+  background-color: #ffffff;
+  text-align: center;
+  padding: 50px;
+}
+
+.container {
+  background-color: #fff;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-radius: 8px;
+}
+
+.heading h1 {
+  color: #000000;
+  font-size: 4rem;
+  font-weight: 900;
+  margin: 0 0 5px 0;
+  background: -webkit-linear-gradient(#000, #000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+.heading h4 {
+  color: #4d4d4d;
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 35px 0;
+}
+
+.btn {
+  outline: none !important;
+}
+
+.btn.btn-primary {
+  background-color: #5c4084;
+  border-color: #5c4084;
+  outline: none;
+}
+.btn.btn-primary:hover {
+  background-color: #442f62;
+  border-color: #442f62;
+}
+.btn.btn-primary:active, .btn.btn-primary:focus {
+  background-color: #684895;
+  border-color: #684895;
+}
+.btn.btn-primary .fa {
+  padding-right: 2px;
+}
+
+select.form-control {
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+table th {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+}
