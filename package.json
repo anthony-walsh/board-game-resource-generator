@@ -1,0 +1,8 @@
+{
+  "name": "board-game-resource-generator",
+  "version": "1.0.0",
+  "devDependencies": {},
+  "dependencies": {
+    "vue-cli": "^2.9.6"
+  }
+}
