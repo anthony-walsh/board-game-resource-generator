@@ -87,6 +87,8 @@ var vm = new Vue({
       if (this.mode === 'count') {
         this.calculateCount();
       }
+
+      recalculate();
     },
     assignLeftovers: function (args) {
       this.selectedValue = args.id;
@@ -102,11 +104,13 @@ var vm = new Vue({
           Vue.set(this.resources[i], 'count', c);
         }
         this.currentRemainder = this.totalCardCount - runningCount;
+        this.currentTotalCards = runningCount;
 
         for (var i = 0; i < this.resources.length; i++) {
           if (this.resources[i].id === this.selectedValue) {
             var originalCount = this.resources[i].count;
             Vue.set(this.resources[i], 'count', originalCount + this.currentRemainder);
+            this.currentTotalCards += this.currentRemainder;
             this.currentRemainder = 0;
           }
         }
@@ -114,23 +118,23 @@ var vm = new Vue({
       {
         alert('The total percentage must equal 100% when using percentage mode.');
       }
-
-      recalculate(null);
     },
     calculateCount: function () {
       if (this.validCount === true) {
         var percentPerCard = 100 / this.totalCardCount;
+        var runningPercent = 0;
 
         for (var i = 0; i < this.resources.length; i++) {
           var p = percentPerCard * this.resources[i].count;
           Vue.set(this.resources[i], 'percentage', p);
+          runningPercent += p;
         }
+
+        this.currentPercentage = runningPercent;
       } else
       {
         alert('The total count must equal the total card count when using count mode.');
       }
-
-      recalculate(null);
     },
     addNewResource: function () {
       this.resources.push({
@@ -143,7 +147,7 @@ var vm = new Vue({
       this.newResource = '';
     },
     recalculate: function (args) {
-      if (args !== null) {
+      if (args.index) {
         this.resources.splice(args.index, 1);
       }
 
@@ -202,11 +206,6 @@ var vm = new Vue({
       }
 
       this.currentAverageValue = sum / iterator;
-    },
-    download: function () {
-      var jsonObject = JSON.stringify(this.resources);
-      alert(jsonObject);
-      this.convertToCSV(jsonObject);
     },
     download: function () {
       var csv = 'Resource,Value\n';

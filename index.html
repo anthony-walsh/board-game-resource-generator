@@ -20,7 +20,7 @@
     <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
        <div class="form-group">
          <label>Total Card Count </label>
-        <input type="number" v-model="totalCardCount" placeholder="Enter Total Card Count Required" class="form-control text-center" @change="recalculate(null)">
+        <input type="number" v-model="totalCardCount" placeholder="Enter Total Card Count Required" class="form-control text-center" v-on:input="recalculate">
         </input>
       </div>
     </div>
